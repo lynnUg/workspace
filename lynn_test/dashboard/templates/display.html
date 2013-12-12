@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block body_block %}
+{%if object_list %}
+<table>
+<col width="1"></col>
+<col></col>
+<thead>
+  <th>Vote</th>
+    <th>Story</th>
+</thead>
+<tbody>
+
+  {% for link in object_list %}
+  <tr class="{% cycle odd,even %}">
+    <td class="vote">
+     
+      
+      </td>
+    <td class="item">
+      
+    </td>
+  </tr>{% endfor %}
+</tbody>
+</table>
+{% else %}
+<h1>No recent user locations</h1>
+{% endif %}
+{% end block%}

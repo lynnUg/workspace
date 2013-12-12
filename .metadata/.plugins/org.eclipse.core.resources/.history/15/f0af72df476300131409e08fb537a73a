@@ -1,0 +1,80 @@
+package com.example.locator;
+
+import java.util.ArrayList;
+
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
+import android.location.LocationManager;
+import android.location.LocationListener;
+import android.location.Location;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+public class MainActivity  extends Activity implements OnClickListener{
+	String lat,log;
+	Context context;
+	ArrayList listContent;
+	ListView list;
+	@Override
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		HttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost("localhost:8000");
+		LocationManager mylocman=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		LocationListener myloclist=new MylocListener();
+		mylocman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, myloclist);
+		
+	}
+
+	public class MylocListener implements LocationListener{
+		
+		public void onLocationChanged(Location loc){
+		String text="My location is Latitude ="+ loc.getLatitude()+"Longitude="+loc.getLongitude();
+		lat=loc.getLatitude()+"";
+		log=loc.getLongitude()+"";
+		updateDatabase();
+		}
+		
+	   public void onProviderDisabled(String provider){
+		
+	   }
+	   public void onProviderEnabled(String provider){
+		
+	   }
+	   public void onStatusChanged(String  provider,int status ,Bundle extras){
+		   
+	   }
+	 }
+  public void updateDatabase(){
+	  GPSDatabase myDatabase=new GPSDatabase(context);
+	  myDatabase.open();
+	  myDatabase.insertRows(lat.substring(0,4),log.substring(0,4));
+	  myDatabase.close();
+  }
+@Override
+public void onClick(View v) {
+	// TODO Auto-generated method stub
+	Context context=getApplicationContext();
+	GPSDatabase myDatabase=new GPSDatabase(this);
+	myDatabase.open();
+	Cursor cursor=myDatabase.getAllRows();
+	cursor.moveToFirst();
+	listContent=new ArrayList();
+	for(int i=0;i<cursor.getCount();i++){
+		listContent.add("Lat="+cursor.getString(1)+""+"Log"+cursor.getString(2));
+		cursor.moveToNext();
+	}
+	myDatabase.close();
+	ListAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_dropdown_item_1line,listContent);
+	list=(ListView)findViewById(R.layout.listview01);
+	list.setAdapter(adapter);
+}
+} 

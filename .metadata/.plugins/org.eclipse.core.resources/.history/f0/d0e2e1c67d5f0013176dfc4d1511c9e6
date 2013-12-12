@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+import java.*;
+public class Question2b 
+{
+	public static void main(String[] args) throws IOException {
+
+	    Map<String ,int> wordcount = new HashMap<String ,int>();
+
+	    File file = new File(args[0]);   //path to the file
+
+	    String str = FileUtils.readFileToString(file);   // converts a file into a string
+
+
+	    String[] words = str.split("\\s+");     // split the line on whitespace,
+	                                            // would return an array of words
+
+	    for (String s : words) {
+
+	        wordcount.add(new WordCount(s));
+
+	        WordCount.incCount();
+
+	    }
+
+	        
+	    for (WordCount w : wordcount) {
+
+	        System.out.println(w.getValue() + " " + w.getCount());
+	    }
+
+	}
+	
+
+}
+

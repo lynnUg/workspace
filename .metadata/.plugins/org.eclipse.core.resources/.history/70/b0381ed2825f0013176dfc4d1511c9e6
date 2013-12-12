@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.*;
+public class Question2b 
+{
+	public static void main(String[] args) throws IOException {
+
+	    HashMap<String ,Integer> wordcount = new HashMap<String ,Integer>();
+
+	    File file = new File(args[0]);   //path to the file
+	    Scanner in = null;
+	    try 
+        {
+            in = new Scanner(new FileReader(file));
+            while(in.hasNextLine() ) 
+            {
+            	String[] words = in.nextLine().split("\\s+");
+            	for (String s : words) {
+
+        	       if(wordcount.containsKey(s))
+        	       {
+        	    	   wordcount.put(s,wordcount.get(s)+1);   
+        	       }
+        	       else
+        	       {
+        	          wordcount.put(s, 1);
+        	       }
+
+        	    }
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();      
+        }
+        finally
+        {
+            try { in.close() ; } catch(Exception e) { /* ignore */ }  
+        }
+	    
+	        
+	    for (WordCount w : wordcount) {
+
+	        System.out.println(w.getValue() + " " + w.getCount());
+	    }
+
+	}
+	
+
+}
+

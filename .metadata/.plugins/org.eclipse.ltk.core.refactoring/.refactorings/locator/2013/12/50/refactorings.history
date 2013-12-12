@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;GPSLocation.java&apos; to &apos;locator/src/com.example.locator&apos;&#x0D;&#x0A;- Original project: &apos;locator&apos;&#x0D;&#x0A;- Destination element: &apos;locator/src/com.example.locator&apos;&#x0D;&#x0A;- Original element: &apos;GPSLocation.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;com.example.locator" element1="/src&lt;{GPSLocation.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1386516613999" units="1" version="1.0"/>
+</session>
