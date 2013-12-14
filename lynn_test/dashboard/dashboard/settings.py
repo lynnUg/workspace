@@ -184,7 +184,8 @@ REST_FRAMEWORK = {
 }
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config(default='postgres://gmmyxzmfrafffe:T_xQh53eCkhZRvgmaK4gDTRk7a@ec2-54-225-103-9.compute-1.amazonaws.com:5432/dahvof1730epjv')
+
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -193,7 +194,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuratio
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR =  os.getcwd()
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
